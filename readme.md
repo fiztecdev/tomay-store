@@ -12,6 +12,40 @@
 - MySQL
 - Composer
 
+# Requisitos
+
+- PHP >= 5.6.x
+- Tener Instalado Composer
+- Tener Instalado MySQL >=5.x
+- Configurar PHP para el CLI
+
+# Pasos para ejecutar el Proyecto
+- Modifique los parametros de la BD en el archivo .env:
+- `DB_CONNECTION=mysql
+ DB_HOST=127.0.0.1
+ DB_PORT=3306
+ DB_DATABASE=YOUR_DATABASE
+ DB_USERNAME=root
+ DB_PASSWORD=YOUR_PASSWORD`
+- Cree la Tabla en la BD que ha creado:
+- `CREATE TABLE usuarios
+ (
+   id     INT AUTO_INCREMENT
+     PRIMARY KEY,
+   name   VARCHAR(255)                NOT NULL,
+   email  VARCHAR(255)                NOT NULL,
+   phone  VARCHAR(15)                 NOT NULL,
+   status ENUM ('1', '0') DEFAULT '1' NOT NULL
+   COMMENT '1=Active, 0=Inactive'
+ );`
+ - Ejecute el comando desde el CLI dentro del proyecto:
+ - `composer update`
+ 
+ - Y finalmente ejecute:
+ - `php artisan serve`
+ 
+ - URL :
+ - `http://127.0.0.1:8000/store/usuario`
 
 ## Acerca de Laravel
 
