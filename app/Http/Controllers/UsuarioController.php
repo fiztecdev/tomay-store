@@ -4,6 +4,7 @@ namespace apptour\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 use apptour\Http\Requests;
@@ -23,6 +24,8 @@ class UsuarioController extends Controller
 
     public function index(Request $request)
     {
+
+
         if ($request){
             $query=trim($request->get('searchText'));
             $usuarios=DB::table('usuarios')->where('name','LIKE','%'.$query.'%')
@@ -47,11 +50,15 @@ class UsuarioController extends Controller
         $usuario->name=$request->get('name');
         $usuario->email=$request->get('email');
         $usuario->phone=$request->get('phone');
+        Log::debug("Antes de recibir la imagen");
         if (Input::hasFile('image')){
             $file=Input::file("image");
+            Log::debug('Nombre de la Imagen: ');
             $file->move(public_path().'/imagenes/usuarios/',$file->getClientOriginalName());
             $usuario->image=$file->getClientOriginalName();
 
+        }else{
+            $usuario->image='init.png';
         }
         $usuario->save();
         return Redirect::to('store/usuario');

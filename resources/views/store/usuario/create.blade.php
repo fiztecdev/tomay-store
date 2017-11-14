@@ -12,7 +12,7 @@
                     </ul>
                 </div>
             @endif
-            {!! Form::open(array('url'=>'store/usuario', 'method'=>'POST', 'autocomplete'=>'off')) !!}
+            {!! Form::open(array('url'=>'store/usuario', 'method'=>'POST', 'autocomplete'=>'off','files'=>true)) !!}
             {{Form::token()}}
                 <div class="form-group">
                     <label for="nombre">Nombre</label>

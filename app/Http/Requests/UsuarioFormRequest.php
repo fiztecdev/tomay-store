@@ -24,9 +24,10 @@ class UsuarioFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required| max:50',
+            'name'=>'required | max:50',
             'email'=>'required',
-            'phone'=>'required'
+            'phone'=>'required',
+            'image'=>'mimes:jpeg,png,svg'
         ];
     }
 }
