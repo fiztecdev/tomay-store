@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::resource('store/usuario','UsuarioController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

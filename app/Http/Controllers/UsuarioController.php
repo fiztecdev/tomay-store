@@ -20,6 +20,7 @@ class UsuarioController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth');
     }
 
     public function index(Request $request)
@@ -29,8 +30,6 @@ class UsuarioController extends Controller
         if ($request){
             $query=trim($request->get('searchText'));
             $usuarios=DB::table('usuarios')->where('name','LIKE','%'.$query.'%')
-            ->orwhere('email','LIKE','%'.$query.'%')
-            ->orwhere('phone','LIKE','%'.$query.'%')
             ->where('status','=','1')
             ->orderBy('id','asc')
             ->paginate(7);

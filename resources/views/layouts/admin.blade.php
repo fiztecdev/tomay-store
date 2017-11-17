@@ -62,7 +62,9 @@
                             <li class="user-footer">
 
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Cerrar</a>
+                                    <a href="{{url('/logout')}}"  onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();
+                                                    "class="btn btn-default btn-flat">Cerrar</a>
                                 </div>
                             </li>
                         </ul>

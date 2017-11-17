@@ -4,7 +4,7 @@ namespace apptour\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdministradorFormRequest extends FormRequest
+class PaqueteTuristicoFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class AdministradorFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,7 +24,9 @@ class AdministradorFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'ruta'=>'required',
+            'costo'=>'required | numeric',
+            'duración_dias'=>'required'
         ];
     }
 }
