@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+   return view('auth/login');
 });
 
 Route::resource('store/usuario','UsuarioController');

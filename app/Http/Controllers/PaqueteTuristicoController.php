@@ -45,9 +45,9 @@ class PaqueteTuristicoController extends Controller
     public function create()
     {
         $restaurantes=DB::table('restaurante')->get();
-        $distinos=DB::table('distino')->get();
+        $destinos=DB::table('distino')->get();
         $hoteles=DB::table('hotel')->get();
-        return view('store.pqturistico.create',['restaurantes'=>$restaurantes,'distinos'=>$distinos, 'hoteles'=>$hoteles]);
+        return view('store.pqturistico.create',['restaurantes'=>$restaurantes,'destinos'=>$destinos, 'hoteles'=>$hoteles]);
 
     }
 
