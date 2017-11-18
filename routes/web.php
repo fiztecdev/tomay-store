@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('store/usuario','UsuarioController');
+Route::resource('store/pqturistico','PaqueteTuristicoController');
 
 Auth::routes();
 

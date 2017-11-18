@@ -20,7 +20,6 @@ class PaqueteTuristicoController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     public function index(Request $request)
@@ -29,16 +28,16 @@ class PaqueteTuristicoController extends Controller
 
         if ($request){
             $query=trim($request->get('searchText'));
-            $pqturistico=DB::table('pq_turistico as pq')
-                ->join('restaurante res','pq.id_res','=','res.id_res')
-                ->join('distino dis','pq.id_dis','=','dis.id_dis')
-                ->join('hotel hot','pq.id_hot','=','hot.id_hot')
-                ->select('pq.id_pq','pq.ruta','pq.costo','pq.duracion_dias','res.nombre as restaurante', 'dis.lugar as distino','hot.nombre as hotel')
+            $pqturisticos=DB::table('pq_turistico as pq')
+                ->join('restaurante as res','pq.id_res','=','res.id_res')
+                ->join('distino as dis','pq.id_dis','=','dis.id_dis')
+                ->join('hotel as hot','pq.id_hot','=','hot.id_hot')
+                ->select('pq.id_paq','pq.ruta','pq.costo','pq.duracion_dias','res.nombre as restaurante', 'dis.lugar as distino','hot.nombre as hotel')
                 ->where('pq.ruta','LIKE','%'.$query.'%')
                 ->where('estado','=','1')
-                ->orderBy('pq.id_pq','desc')
+                ->orderBy('pq.id_paq','desc')
                 ->paginate(7);
-            return view('store.pqturistico.index',["pqturisticos"=>$pqturistico],["searchText"=>$query]);
+            return view('store.pqturistico.index',["pqturisticos"=>$pqturisticos],["searchText"=>$query]);
         }
 
     }
@@ -48,7 +47,7 @@ class PaqueteTuristicoController extends Controller
         $restaurantes=DB::table('restaurante')->get();
         $distinos=DB::table('distino')->get();
         $hoteles=DB::table('hotel')->get();
-        return view('store.usuario.create',['restaurantes'=>$restaurantes,'distinos'=>$distinos, 'hoteles'=>$hoteles]);
+        return view('store.pqturistico.create',['restaurantes'=>$restaurantes,'distinos'=>$distinos, 'hoteles'=>$hoteles]);
 
     }
 
@@ -76,7 +75,7 @@ class PaqueteTuristicoController extends Controller
         $restaurantes=DB::table('restaurante')->get();
         $distinos=DB::table('distino')->get();
         $hoteles=DB::table('hotel')->get();
-        return view("store.usuario.edit",['pqturistico'=>$pqturistico,'restaurantes'=>$restaurantes,'distinos'=>$distinos,'hoteles'=>$hoteles ]);
+        return view("store.pqturistico.edit",['pqturistico'=>$pqturistico,'restaurantes'=>$restaurantes,'distinos'=>$distinos,'hoteles'=>$hoteles ]);
     }
 
     public function update(PaqueteTuristicoFormRequest $request,$id)

@@ -8,7 +8,7 @@ class PaqueteTuristico extends Model
 {
     //
     protected $table="pq_turistico";
-    protected $primaryKey="id_pq";
+    protected $primaryKey="id_paq";
 
     public $timestamps=false;
 
