@@ -15,7 +15,9 @@ class Hotel extends Model
     protected $fillable=[
         'nombre',
         'ubicacion',
-        'fotos'
+        'descripcion',
+        'fotos',
+        'estado'
     ];
     protected $guarded=[
 

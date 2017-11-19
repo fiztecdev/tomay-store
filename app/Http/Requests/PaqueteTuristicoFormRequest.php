@@ -25,7 +25,7 @@ class PaqueteTuristicoFormRequest extends FormRequest
     {
         return [
             'ruta'=>'required',
-            'costo'=>'required | numeric',
+            'costo'=>'required|numeric',
             'duracion'=>'required'
         ];
     }

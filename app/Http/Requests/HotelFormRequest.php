@@ -24,7 +24,9 @@ class HotelFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre'=>'required|max:100',
+            'ubicacion'=>'required',
+            'image'=>'mimes:jpeg,png,svg,jpg'
         ];
     }
 }

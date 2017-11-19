@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Route::resource('store/usuario','UsuarioController');
 Route::resource('store/pqturistico','PaqueteTuristicoController');
+Route::resource('store/hotel','HotelController');
+Route::resource('store/restaurante','RestauranteController');
+Route::resource('store/destino','DestinoController');
 
 Auth::routes();
 

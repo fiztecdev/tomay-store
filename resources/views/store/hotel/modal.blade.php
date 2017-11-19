@@ -1,7 +1,6 @@
-<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1"
-     id="modal-delete-{{$pqturistico->id_paq}}">
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{$hotel->id_hot}}">
 
-    {!! Form::Open(array('action'=>array('PaqueteTuristicoController@destroy',$pqturistico->id_paq),'method'=>'DELETE')) !!}
+    {!! Form::Open(array('action'=>array('HotelController@destroy',$hotel->id_hot),'method'=>'DELETE')) !!}
 
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,11 +8,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span arial-hidden="true">x</span>
                 </button>
-                <h4 class="modal-title">Eliminar Paquete Turistico</h4>
+                <h4 class="modal-title">Eliminar Hotel</h4>
 
             </div>
             <div class="modal-body">
-                <p class="text-success">Confirme si desea Eliminar el Paquete Turístico</p>
+                <p class="text-success">Confirme si desea Eliminar el Hotel</p>
 
             </div>
             <div class="modal-footer">

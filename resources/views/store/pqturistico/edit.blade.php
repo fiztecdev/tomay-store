@@ -2,7 +2,7 @@
 @section('contenido')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <h3>Editar Usuario: {{$pqturistico->ruta}}</h3>
+            <h3>Editar Paquete Turístico: {{$pqturistico->ruta}}</h3>
             @if(count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -12,26 +12,79 @@
                     </ul>
                 </div>
             @endif
-            {!! Form::model($usuario,['method'=>'PATCH', 'route'=>['usuario.update',$usuario->id]]) !!}
-            {{Form::token()}}
+        </div>
+    </div>
+    {!! Form::model($pqturistico,['method'=>'PATCH', 'route'=>['pqturistico.update',$pqturistico->id_paq],'files'=>true]) !!}
+    {{Form::token()}}
+    <div class="row">
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="name" class="form-control" value="{{$usuario->name}}" placeholder="Nombre">
+                <label for="nombre">Ruta</label>
+                <input type="text" name="ruta" required value="{{$pqturistico->ruta}}" class="form-control">
             </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" class="form-control" value="{{$usuario->email}}" placeholder="Email">
+                <label for="email">Costo</label>
+                <input type="number" name="costo" required value="{{$pqturistico->costo}}" class="form-control">
             </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" name="phone" class="form-control" value="{{$usuario->phone}}" placeholder="Phone">
+                <label for="duracion_dias">Duración</label>
+                <input type="text" name="duracion" required value="{{$pqturistico->duracion_dias}}"
+                       class="form-control">
             </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="restaurante">Restaurantes</label>
+                <select name="restaurante" class="form-control">
+                    @foreach($restaurantes as $restaurante)
+                        @if($restaurante->id_res==$pqturistico->id_res)
+                            <option value="{{$restaurante->id_res}}" selected>{{$restaurante->nombre}}</option>
+                        @else
+                            <option value="{{$restaurante->id_res}}">{{$restaurante->nombre}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="hotel">Hoteles</label>
+                <select name="hotel" class="form-control">
+                    @foreach($hoteles as $hotel)
+                        @if($hotel->id_hot==$pqturistico->id_hot)
+                            <option value="{{$hotel->id_hot}}" selected>{{$hotel->nombre}}</option>
+                        @else
+                            <option value="{{$hotel->id_hot}}">{{$hotel->nombre}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="destino">Destinos</label>
+                <select name="destino" class="form-control">
+                    @foreach($destinos as $destino)
+                        @if($destino->id_dis==$pqturistico->id_dis)
+                            <option value="{{$destino->id_dis}}" selected>{{$destino->lugar}}</option>
+                        @else
+                            <option value="{{$destino->id_dis}}">{{$destino->lugar}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <button type="submit" class="btn btn-primary"> Guardar</button>
                 <button type="reset" class="btn btn-danger">Cancelar</button>
             </div>
-            {!! Form::close()!!}
         </div>
-
     </div>
+    {!! Form::close()!!}
+
 @endsection

@@ -15,6 +15,7 @@ class Restaurante extends Model
     protected $fillable=[
         'nombre',
         'ubicacion',
+        'descripcion',
         'fotos'
     ];
     protected $guarded=[

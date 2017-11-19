@@ -24,7 +24,7 @@ class DestinoFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'lugar'=>'required'
         ];
     }
 }

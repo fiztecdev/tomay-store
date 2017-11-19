@@ -14,8 +14,8 @@
             @endif
         </div>
     </div>
-            {!! Form::open(array('url'=>'store/pqturistico', 'method'=>'POST', 'autocomplete'=>'off','files'=>true)) !!}
-            {{Form::token()}}
+    {!! Form::open(array('url'=>'store/pqturistico', 'method'=>'POST', 'autocomplete'=>'off','files'=>true)) !!}
+    {{Form::token()}}
     <div class="row">
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
@@ -26,13 +26,15 @@
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="email">Costo</label>
-                <input type="number" name="costo"  required value="{{old('costo')}}" class="form-control" placeholder="Costo">
+                <input type="number" name="costo" required value="{{old('costo')}}" class="form-control"
+                       placeholder="Costo">
             </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="duracion_dias">Duración</label>
-                <input type="text" name="duracion" required value="{{old('duracion_dias')}}"  class="form-control" placeholder="Duración">
+                <input type="text" name="duracion" required value="{{old('duracion_dias')}}" class="form-control"
+                       placeholder="Duración">
             </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -50,7 +52,7 @@
                 <label for="hotel">Hoteles</label>
                 <select name="hotel" class="form-control">
                     @foreach($hoteles as $hotel)
-                        <option value="{{$hotel->id_hot}}">{{$restaurante->nombre}}</option>
+                        <option value="{{$hotel->id_hot}}">{{$hotel->nombre}}</option>
                     @endforeach
                 </select>
             </div>
@@ -58,7 +60,7 @@
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="destino">Destinos</label>
-                <select name="distino" class="form-control">
+                <select name="destino" class="form-control">
                     @foreach($destinos as $destino)
                         <option value="{{$destino->id_dis}}">{{$destino->lugar}}</option>
                     @endforeach
@@ -73,5 +75,5 @@
         </div>
     </div>
 
-             {!! Form::close()!!}
+    {!! Form::close()!!}
 @endsection

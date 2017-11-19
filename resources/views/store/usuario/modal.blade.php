@@ -1,4 +1,5 @@
-<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-delete-{{$usuario->id}}">
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1"
+     id="modal-delete-{{$usuario->id}}">
 
     {!! Form::Open(array('action'=>array('UsuarioController@destroy',$usuario->id),'method'=>'DELETE')) !!}
 

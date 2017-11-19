@@ -34,7 +34,7 @@ class PaqueteTuristicoController extends Controller
                 ->join('hotel as hot','pq.id_hot','=','hot.id_hot')
                 ->select('pq.id_paq','pq.ruta','pq.costo','pq.duracion_dias','res.nombre as restaurante', 'dis.lugar as distino','hot.nombre as hotel')
                 ->where('pq.ruta','LIKE','%'.$query.'%')
-                ->where('estado','=','1')
+                ->where('PQ.estado','=','1')
                 ->orderBy('pq.id_paq','desc')
                 ->paginate(7);
             return view('store.pqturistico.index',["pqturisticos"=>$pqturisticos],["searchText"=>$query]);
@@ -58,7 +58,7 @@ class PaqueteTuristicoController extends Controller
         $pqturistico->duracion_dias=$request->get('duracion');
         $pqturistico->id_hot=$request->get('hotel');
         $pqturistico->id_res=$request->get('restaurante');
-        $pqturistico->id_dis=$request->get('distino');
+        $pqturistico->id_dis=$request->get('destino');
         $pqturistico->save();
         return Redirect::to('store/pqturistico');
 
@@ -75,7 +75,7 @@ class PaqueteTuristicoController extends Controller
         $restaurantes=DB::table('restaurante')->get();
         $distinos=DB::table('distino')->get();
         $hoteles=DB::table('hotel')->get();
-        return view("store.pqturistico.edit",['pqturistico'=>$pqturistico,'restaurantes'=>$restaurantes,'distinos'=>$distinos,'hoteles'=>$hoteles ]);
+        return view("store.pqturistico.edit",['pqturistico'=>$pqturistico,'restaurantes'=>$restaurantes,'destinos'=>$distinos,'hoteles'=>$hoteles ]);
     }
 
     public function update(PaqueteTuristicoFormRequest $request,$id)
@@ -86,12 +86,10 @@ class PaqueteTuristicoController extends Controller
         $pqturistico->duracion_dias=$request->get('duracion');
         $pqturistico->id_hot=$request->get('hotel');
         $pqturistico->id_res=$request->get('restaurante');
-        $pqturistico->id_dis=$request->get('distino');
+        $pqturistico->id_dis=$request->get('destino');
         $pqturistico->update();
 
         return Redirect::to('store/pqturistico');
-
-
     }
 
     public function destroy($id)

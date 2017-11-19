@@ -2,7 +2,7 @@
 @section('contenido')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <h3>Editar Usuario: {{$usuario->name}}</h3>
+            <h3>Nuevo Hotel</h3>
             @if(count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -14,35 +14,31 @@
             @endif
         </div>
     </div>
-    {!! Form::model($usuario,['method'=>'PATCH', 'route'=>['usuario.update',$usuario->id], 'files'=>true]) !!}
+    {!! Form::open(array('url'=>'store/hotel', 'method'=>'POST', 'autocomplete'=>'off','files'=>true)) !!}
     {{Form::token()}}
     <div class="row">
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="name" class="form-control" value="{{$usuario->name}}" placeholder="Nombre">
+                <input type="text" name="nombre" class="form-control" value="{{old('nombre')}}" placeholder="Nombre">
             </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" class="form-control" value="{{$usuario->email}}" placeholder="Email">
-            </div>
-        </div>
-        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" name="phone" class="form-control" value="{{$usuario->phone}}" placeholder="Phone">
+                <label for="ubicacion">Ubicación</label>
+                <input type="text" name="ubicacion" class="form-control" value="{{old('ubicacion')}}" placeholder="Ubicacion">
             </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="image">Imagen</label>
-                <input type="file" name="image" class="form-control">
-                @if(($usuario->image)!="")
-                    <img src="{{asset('imagenes/usuarios/'.$usuario->image)}}" hight="100px" width="100px"
-                         class="img img-thumbnail">
-                @endif
+                <input type="file" name="image" class="form-control" value="{{old('image')}}">
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="ubicacion">Descripcion</label>
+                <textarea name="descripcion" class="form-control" placeholder="Descripcion">{{old('descripcion')}}</textarea>
             </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -53,4 +49,5 @@
         </div>
     </div>
     {!! Form::close()!!}
+
 @endsection
