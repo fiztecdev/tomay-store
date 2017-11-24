@@ -1,0 +1,13 @@
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('panamericana ', 34, '2 dias ', 1, 1, 2, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('ruta corta', 344, 'tres dias', 1, 1, 2, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('ruta corta', 344, '1 dias', 1, 1, 2, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('toda la ciudad', 300, '2', 2, 4, 6, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('dfgh', 855, '2 dias', 2, 3, 1, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('ertyuiop', 9852, '5dias mas una noche', 2, 3, 4, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('lsdfghjk', 696, '4 dias', 1, 2, 5, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('lsdfghjk', 696, '4 dias', 1, 2, 5, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('sdfgh', 524, '3d', 1, 2, 3, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('sdfg update', 223, '2 dias', 3, 1, 5, '1');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('rusia', 2424, '23 dias', 3, 1, 1, '0');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('FRANCIA', 224, '100 DIAS', 4, 2, 4, '0');
+INSERT INTO development.pq_turistico (ruta, costo, duracion_dias, id_hot, id_res, id_dis, estado) VALUES ('CUSCO', 2000, '3 DIAS', 17, 6, 7, '1');
