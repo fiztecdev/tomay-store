@@ -42,7 +42,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Tomay Store') }}
+                        <i class="fa fa-taxi"></i>Tourme
                     </a>
                 </div>
 
@@ -56,8 +56,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Registrar</a></li>
+                            <li><a href="store/pqturistico"><i class="fa fa-home"></i>  Inicio</a></li>
+                            <li><a href="{{ route('login') }}"><i class="fa fa-sign-in"></i> Iniciar Sesión</a></li>
+                            <li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Crear Cuenra</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -69,7 +70,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Cerrar Sesión
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

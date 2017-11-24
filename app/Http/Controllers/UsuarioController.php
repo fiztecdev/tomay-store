@@ -56,7 +56,7 @@ class UsuarioController extends Controller
             $usuario->image=$file->getClientOriginalName();
 
         }else{
-            $usuario->image='init.png';
+            $usuario->image='init.svg';
         }
         $usuario->save();
         return Redirect::to('store/usuario');

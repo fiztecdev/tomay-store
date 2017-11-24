@@ -184,6 +184,8 @@ return [
 
         Laraveles\Spanish\SpanishServiceProvider::class,
 
+        Laravel\Passport\PassportServiceProvider::class,
+
     ],
 
     /*

@@ -1,0 +1,296 @@
+create table ANIMAL
+(
+	A_ID int auto_increment
+		primary key,
+	A_NAME varchar(50) not null,
+	A_AGE int(2) not null
+)
+;
+
+create table ARTICLES
+(
+	ARTICLE_ID int(5) auto_increment
+		primary key,
+	TITLE varchar(200) not null,
+	CATEGORY varchar(100) not null
+)
+;
+
+create table GUEST
+(
+	GUEST_ID bigint auto_increment
+		primary key,
+	FIRST_NAME varchar(64) null,
+	LAST_NAME varchar(64) null,
+	EMAIL_ADDRESS varchar(64) null,
+	ADDRESS varchar(64) null,
+	COUNTRY varchar(32) null,
+	STATE varchar(12) null,
+	PHONE_NUMBER varchar(24) null
+)
+;
+
+create table RESERVATION
+(
+	RESERVATION_ID bigint auto_increment
+		primary key,
+	ROOM_ID bigint not null,
+	GUEST_ID bigint not null,
+	RES_DATE date null,
+	constraint reservation_ibfk_2
+		foreign key (GUEST_ID) references GUEST (GUEST_ID)
+)
+;
+
+create index GUEST_ID
+	on RESERVATION (GUEST_ID)
+;
+
+create index IDX_RES_DATE_
+	on RESERVATION (RES_DATE)
+;
+
+create index ROOM_ID
+	on RESERVATION (ROOM_ID)
+;
+
+create table ROOM
+(
+	ROOM_ID bigint auto_increment
+		primary key,
+	NAME varchar(16) not null,
+	ROOM_NUMBER char(2) not null,
+	BED_INFO char(2) not null,
+	constraint ROOM_NUMBER
+		unique (ROOM_NUMBER)
+)
+;
+
+alter table RESERVATION
+	add constraint reservation_ibfk_1
+		foreign key (ROOM_ID) references ROOM (ROOM_ID)
+;
+
+create table administrador
+(
+	id_adm int auto_increment
+		primary key,
+	user varchar(40) not null,
+	nombre varchar(40) not null,
+	contrasenia varchar(11) not null
+)
+;
+
+create table distancia
+(
+	A_ID int auto_increment
+		primary key,
+	A_DISTANCIA int not null,
+	A_FECHA timestamp default CURRENT_TIMESTAMP not null
+)
+;
+
+create table distino
+(
+	id_dis int auto_increment
+		primary key,
+	lugar varchar(100) not null,
+	descripcion text not null,
+	fotos varchar(100) null,
+	estado enum('1', '0') default '1' null
+)
+;
+
+create table hotel
+(
+	id_hot int auto_increment
+		primary key,
+	nombre varchar(200) not null,
+	ubicacion varchar(200) not null,
+	descripcion text null,
+	fotos varchar(100) null,
+	estado enum('1', '0') default '1' null
+)
+;
+
+create table items
+(
+	id int(10) unsigned auto_increment
+		primary key,
+	title varchar(255) not null,
+	description text not null,
+	created_at timestamp null,
+	updated_at timestamp null
+)
+;
+
+create table migrations
+(
+	id int(10) unsigned auto_increment
+		primary key,
+	migration varchar(255) not null,
+	batch int not null
+)
+;
+
+create table password_resets
+(
+	email varchar(255) not null,
+	token varchar(255) not null,
+	created_at timestamp null
+)
+;
+
+create index password_resets_email_index
+	on password_resets (email)
+;
+
+create table pq_turistico
+(
+	id_paq int auto_increment
+		primary key,
+	ruta varchar(500) not null,
+	costo int not null,
+	duracion_dias text not null,
+	id_hot int not null,
+	id_res int not null,
+	id_dis int not null,
+	estado enum('1', '0') default '1' null,
+	constraint pq_turistico_ibfk_3
+		foreign key (id_hot) references hotel (id_hot)
+			on update cascade on delete cascade,
+	constraint pq_turistico_ibfk_1
+		foreign key (id_dis) references distino (id_dis)
+			on update cascade on delete cascade
+)
+;
+
+create index id_dis
+	on pq_turistico (id_dis)
+;
+
+create index id_hot
+	on pq_turistico (id_hot)
+;
+
+create index id_res
+	on pq_turistico (id_res)
+;
+
+create table promocion_tur
+(
+	id_pro int auto_increment
+		primary key,
+	fecha date not null,
+	precio int not null,
+	tiemp_lim varchar(40) not null,
+	id_pq int not null,
+	constraint promocion_tur_ibfk_1
+		foreign key (id_pq) references pq_turistico (id_paq)
+			on update cascade on delete cascade
+)
+;
+
+create index id_pq
+	on promocion_tur (id_pq)
+;
+
+create table restaurante
+(
+	id_res int auto_increment
+		primary key,
+	nombre varchar(100) not null,
+	ubicacion varchar(60) not null,
+	fotos varchar(100) null,
+	descripcion text null,
+	estado enum('1', '0') default '1' null
+)
+;
+
+alter table pq_turistico
+	add constraint pq_turistico_ibfk_2
+		foreign key (id_res) references restaurante (id_res)
+			on update cascade on delete cascade
+;
+
+create table user
+(
+	id int auto_increment
+		primary key,
+	first_name varchar(11) null,
+	last_name varchar(11) null,
+	username varchar(11) null,
+	created datetime null,
+	updated datetime null
+)
+;
+
+create table users
+(
+	id int(10) unsigned auto_increment
+		primary key,
+	name varchar(255) not null,
+	email varchar(255) not null,
+	password varchar(255) not null,
+	remember_token varchar(100) null,
+	created_at timestamp null,
+	updated_at timestamp null,
+	constraint users_email_unique
+		unique (email)
+)
+;
+
+create table usuario
+(
+	user_id int auto_increment
+		primary key,
+	user_dni varchar(8) null,
+	user_name varchar(200) not null,
+	user_lastname varchar(200) not null,
+	user_email varchar(200) null,
+	user_age int(3) not null,
+	user_address varchar(200) null,
+	user_birthday date null,
+	user_cellphone varchar(15) null,
+	USER_STATUS tinyint(1) null,
+	USER_ROLE varchar(200) null,
+	user_create timestamp default CURRENT_TIMESTAMP not null,
+	user_update timestamp default CURRENT_TIMESTAMP not null
+)
+;
+
+create table usuarios
+(
+	id int auto_increment
+		primary key,
+	name varchar(255) not null,
+	email varchar(255) not null,
+	phone varchar(15) not null,
+	status enum('1', '0') default '1' not null comment '1=Active, 0=Inactive',
+	image varchar(100) null
+)
+;
+
+create procedure ALLARTICLES ()
+BEGIN
+    SELECT * FROM ARTICLES;
+  END;
+
+create function GET_EDAD (dni varchar(8)) returns int(2)
+BEGIN
+    DECLARE EDAD INT(2);
+    SELECT user_age INTO EDAD FROM usuario WHERE usuario.user_dni=dni;
+    RETURN EDAD;
+  END;
+
+create procedure GET_USERS (IN LIMITER int)
+BEGIN
+    SELECT * FROM usuario  LIMIT LIMITER;
+  END;
+
+create procedure collect_articles ()
+BEGIN
+        DECLARE  cur1 CURSOR FOR SELECT ARTICLES.ARTICLE_ID, ARTICLES.TITLE, ARTICLES.CATEGORY FROM ARTICLES;
+       OPEN cur1;
+     END;
+

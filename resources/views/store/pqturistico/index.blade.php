@@ -2,9 +2,15 @@
 @section('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Lista de Paquetes Turísticos <a href="pqturistico/create">
-                    <button class="btn btn-success">Nuevo</button>
-                </a></h3>
+            @if(Auth::check())
+                @if(Auth::user()->type=='admin')
+                    <h3>Lista de Paquetes Turísticos <a href="pqturistico/create">
+                            <button class="btn btn-success">Nuevo</button>
+                        </a></h3>
+                @endif
+            @else
+                <h3>Los mejores Paquetes Turísticos</h3>
+            @endif
             @include('store.pqturistico.search')
         </div>
     </div>
@@ -20,7 +26,11 @@
                     <th>Hotel</th>
                     <th>Restaurante</th>
                     <th>Destino</th>
-                    <th>Opciones</th>
+                    @if(Auth::check())
+                        @if(Auth::user()->type=='admin')
+                            <th>Opciones</th>
+                        @endif
+                    @endif
                     </thead>
                     @foreach($pqturisticos as $pqturistico)
                         <tr>
@@ -31,14 +41,19 @@
                             <td>{{$pqturistico->hotel}}</td>
                             <td>{{$pqturistico->restaurante}}</td>
                             <td>{{$pqturistico->distino}}</td>
-                            <td>
-                                <a href="{{URL::action('PaqueteTuristicoController@edit',$pqturistico->id_paq)}}">
-                                    <button class="btn btn-info">Editar</button>
-                                </a>
-                                <a href="" data-target="#modal-delete-{{$pqturistico->id_paq}}" data-toggle="modal">
-                                    <button class="btn btn-danger">Eliminar</button>
-                                </a>
-                            </td>
+                            @if(Auth::check())
+                                @if(Auth::user()->type=='admin')
+                                    <td>
+                                        <a href="{{URL::action('PaqueteTuristicoController@edit',$pqturistico->id_paq)}}">
+                                            <button class="btn btn-info">Editar</button>
+                                        </a>
+                                        <a href="" data-target="#modal-delete-{{$pqturistico->id_paq}}"
+                                           data-toggle="modal">
+                                            <button class="btn btn-danger">Eliminar</button>
+                                        </a>
+                                    </td>
+                                @endif
+                            @endif
                         </tr>
                         @include('store.pqturistico.modal')
                     @endforeach
@@ -48,6 +63,5 @@
             </div>
             {{$pqturisticos->render()}}
         </div>
-
     </div>
 @endsection

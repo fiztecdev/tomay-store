@@ -44,26 +44,68 @@
                     <!-- Messages: style can be found in dropdown.less-->
 
                     <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
+                    <li class="dropdown user user-menu ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-cog"></i>
                             <small class="bg-green">Active</small>
-                            <span class="hidden-xs">Admin Tomay::Store</span>
+                            <span class="hidden-xs">
+                                @if(Auth::check())
+                                    {{Auth::user()->fullname}}
+                                @else
+                                    Bienvenido a Tourme
+                                @endif
+                            </span>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu animated-dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
+                                @if(Auth::check())
+                                    <img class="img-circle" src="{{asset('imagenes/usuarios/'.Auth::user()->avatar)}}">
+                                @else
+                                    <img class="img-circle img" src="{{asset('imagenes/tourme/travel.svg')}}">
+                                @endif
+
+                            </li>
+                            <li class="user-body">
                                 <p>
-                                    Tomay Dev Freelance Comunity | LATAM
-                                    <small>fvillanueva@tomaydev.org</small>
+                                    @if(Auth::check())
+                                        <i class="fa fa-user text text-yellow"></i>  {{Auth::user()->name}}
+                                        | </i>{{Auth::user()->type}}
+                                    @else
+                                        Mejores Lugares | Vívelo
+                                    @endif
+
+                                    <small>
+                                        @if(Auth::check())
+                                            {{Auth::user()->fullname}}
+                                        @else
+                                            <h3>Puedes Crear tu Cuenta para Empezar un Mundo por Conocer</h3>
+                                        @endif
+
+                                    </small>
                                 </p>
                             </li>
-
-                            <!-- Menu Footer-->
                             <li class="user-footer">
+                                @if(Auth::check())
+                                    <div class="pull-right">
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out"></i>Cerrar Sesión
+                                        </a>
 
-                                <div class="pull-right">
-                                    <a href="" class="btn btn-default btn-flat">Cerrar</a>
-                                </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="col-lg-pull-0">
+                                        <a href="{{ route('login') }}" class="text text-bold">
+                                            <i class="fa fa-sign-in"></i>   Login
+                                        </a>
+
+                                    </div>
+                                @endif
                             </li>
                         </ul>
                     </li>
@@ -85,49 +127,52 @@
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>Store</span>
+                        <i class="fa fa-taxi text text-yellow"></i>
+                        <span>Paquetes</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="usuario"><i class="fa fa-circle-o"></i>Usuario</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i>Cliente</a></li>
+                        <li><a href="pqturistico"><i class="fa fa-circle-o"></i>Paquetes Turísticos</a></li>
+                        <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-th"></i>
-                        <span>Compras</span>
+                        <i class="fa fa-coffee"></i>
+                        <span>Restaurantes</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href=""><i class="fa fa-circle-o"></i> Ingresos</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i> Proveedores</a></li>
+                        <li><a href="restaurante"><i class="fa fa-circle-o"></i>Resturantes</a></li>
+                        <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>Ventas</span>
+                        <i class="fa fa-hotel"></i>
+                        <span>Hoteles</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href=""><i class="fa fa-circle-o"></i> Ventas</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i> Clientes</a></li>
+                        <li><a href="hotel"><i class="fa fa-circle-o"></i>Hoteles</a></li>
+                        <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
+                @if(Auth::check())
+                    @if(Auth::user()->type=='admin')
+                        <li class="treeview">
+                            <a href="usuario">
+                                <i class="fa fa-user"></i> <span>Usuarios y Accesos</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href=""><i class="fa fa-circle-o"></i>Usuarios</a></li>
 
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-folder"></i> <span>Acceso</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href=""><i class="fa fa-circle-o"></i> Usuarios</a></li>
-
-                    </ul>
-                </li>
+                            </ul>
+                        </li>
+                    @endif
+                @endif
                 <li>
                     <a href="#">
                         <i class="fa fa-plus-square"></i> <span>Ayuda</span>
@@ -147,9 +192,6 @@
     </aside>
 
 
-
-
-
     <!--Contenido-->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -163,9 +205,11 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Tomay Store Manager</h3>
                             <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
 
-                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                </button>
                             </div>
                         </div>
                         <!-- /.box-header -->

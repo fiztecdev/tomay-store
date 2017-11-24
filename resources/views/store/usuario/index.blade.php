@@ -2,9 +2,14 @@
 @section('contenido')
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            <h3>Lista de Usuarios <a href="usuario/create">
-                    <button class="btn btn-success">Nuevo</button>
-                </a></h3>
+            @if(Auth::user()->type=='admin')
+                <h3>Lista de Usuarios <a href="usuario/create">
+                        <button class="btn btn-success">Nuevo</button>
+                    </a>
+                </h3>
+            @else
+                <h3>Lista de Usuarios</h3>
+            @endif
             @include('store.usuario.search')
         </div>
     </div>
@@ -19,7 +24,11 @@
                     <th>Phone</th>
                     <th>Imagen</th>
                     <th>Status</th>
-                    <th>Opciones</th>
+                    @if(Auth::check())
+                        @if(Auth::user()->type=='admin')
+                            <th>Opciones</th>
+                        @endif
+                    @endif
                     </thead>
                     @foreach($usuarios as $usuario)
                         <tr>
@@ -32,14 +41,18 @@
                                      hight="100px" width="100px" class="img img-thumbnail">
                             </td>
                             <td>{{$usuario->status}}</td>
-                            <td>
-                                <a href="{{URL::action('UsuarioController@edit',$usuario->id)}}">
-                                    <button class="btn btn-info">Editar</button>
-                                </a>
-                                <a href="" data-target="#modal-delete-{{@$usuario->id}}" data-toggle="modal">
-                                    <button class="btn btn-danger">Eliminar</button>
-                                </a>
-                            </td>
+                            @if(Auth::check())
+                                @if(Auth::user()->type=='admin')
+                                    <td>
+                                        <a href="{{URL::action('UsuarioController@edit',$usuario->id)}}">
+                                            <button class="btn btn-info">Editar</button>
+                                        </a>
+                                        <a href="" data-target="#modal-delete-{{@$usuario->id}}" data-toggle="modal">
+                                            <button class="btn btn-danger">Eliminar</button>
+                                        </a>
+                                    </td>
+                                @endif
+                            @endif
                         </tr>
                         @include('store.usuario.modal')
                     @endforeach
