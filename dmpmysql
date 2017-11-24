@@ -1,94 +1,3 @@
-create table ANIMAL
-(
-	A_ID int auto_increment
-		primary key,
-	A_NAME varchar(50) not null,
-	A_AGE int(2) not null
-)
-;
-
-create table ARTICLES
-(
-	ARTICLE_ID int(5) auto_increment
-		primary key,
-	TITLE varchar(200) not null,
-	CATEGORY varchar(100) not null
-)
-;
-
-create table GUEST
-(
-	GUEST_ID bigint auto_increment
-		primary key,
-	FIRST_NAME varchar(64) null,
-	LAST_NAME varchar(64) null,
-	EMAIL_ADDRESS varchar(64) null,
-	ADDRESS varchar(64) null,
-	COUNTRY varchar(32) null,
-	STATE varchar(12) null,
-	PHONE_NUMBER varchar(24) null
-)
-;
-
-create table RESERVATION
-(
-	RESERVATION_ID bigint auto_increment
-		primary key,
-	ROOM_ID bigint not null,
-	GUEST_ID bigint not null,
-	RES_DATE date null,
-	constraint reservation_ibfk_2
-		foreign key (GUEST_ID) references GUEST (GUEST_ID)
-)
-;
-
-create index GUEST_ID
-	on RESERVATION (GUEST_ID)
-;
-
-create index IDX_RES_DATE_
-	on RESERVATION (RES_DATE)
-;
-
-create index ROOM_ID
-	on RESERVATION (ROOM_ID)
-;
-
-create table ROOM
-(
-	ROOM_ID bigint auto_increment
-		primary key,
-	NAME varchar(16) not null,
-	ROOM_NUMBER char(2) not null,
-	BED_INFO char(2) not null,
-	constraint ROOM_NUMBER
-		unique (ROOM_NUMBER)
-)
-;
-
-alter table RESERVATION
-	add constraint reservation_ibfk_1
-		foreign key (ROOM_ID) references ROOM (ROOM_ID)
-;
-
-create table administrador
-(
-	id_adm int auto_increment
-		primary key,
-	user varchar(40) not null,
-	nombre varchar(40) not null,
-	contrasenia varchar(11) not null
-)
-;
-
-create table distancia
-(
-	A_ID int auto_increment
-		primary key,
-	A_DISTANCIA int not null,
-	A_FECHA timestamp default CURRENT_TIMESTAMP not null
-)
-;
 
 create table distino
 (
@@ -113,16 +22,7 @@ create table hotel
 )
 ;
 
-create table items
-(
-	id int(10) unsigned auto_increment
-		primary key,
-	title varchar(255) not null,
-	description text not null,
-	created_at timestamp null,
-	updated_at timestamp null
-)
-;
+
 
 create table migrations
 (
@@ -131,6 +31,85 @@ create table migrations
 	migration varchar(255) not null,
 	batch int not null
 )
+;
+
+create table oauth_access_tokens
+(
+	id varchar(100) not null
+		primary key,
+	user_id int null,
+	client_id int not null,
+	name varchar(255) null,
+	scopes text null,
+	revoked tinyint(1) not null,
+	created_at timestamp null,
+	updated_at timestamp null,
+	expires_at datetime null
+)
+;
+
+create index oauth_access_tokens_user_id_index
+	on oauth_access_tokens (user_id)
+;
+
+create table oauth_auth_codes
+(
+	id varchar(100) not null
+		primary key,
+	user_id int not null,
+	client_id int not null,
+	scopes text null,
+	revoked tinyint(1) not null,
+	expires_at datetime null
+)
+;
+
+create table oauth_clients
+(
+	id int(10) unsigned auto_increment
+		primary key,
+	user_id int null,
+	name varchar(255) not null,
+	secret varchar(100) not null,
+	redirect text not null,
+	personal_access_client tinyint(1) not null,
+	password_client tinyint(1) not null,
+	revoked tinyint(1) not null,
+	created_at timestamp null,
+	updated_at timestamp null
+)
+;
+
+create index oauth_clients_user_id_index
+	on oauth_clients (user_id)
+;
+
+create table oauth_personal_access_clients
+(
+	id int(10) unsigned auto_increment
+		primary key,
+	client_id int not null,
+	created_at timestamp null,
+	updated_at timestamp null
+)
+;
+
+create index oauth_personal_access_clients_client_id_index
+	on oauth_personal_access_clients (client_id)
+;
+
+create table oauth_refresh_tokens
+(
+	id varchar(100) not null
+		primary key,
+	access_token_id varchar(100) not null,
+	revoked tinyint(1) not null,
+	expires_at datetime null
+)
+;
+
+create index oauth_refresh_tokens_access_token_id_index
+	on oauth_refresh_tokens (access_token_id)
 ;
 
 create table password_resets
@@ -213,25 +192,17 @@ alter table pq_turistico
 			on update cascade on delete cascade
 ;
 
-create table user
-(
-	id int auto_increment
-		primary key,
-	first_name varchar(11) null,
-	last_name varchar(11) null,
-	username varchar(11) null,
-	created datetime null,
-	updated datetime null
-)
-;
 
 create table users
 (
 	id int(10) unsigned auto_increment
 		primary key,
+	fullname varchar(255) not null,
 	name varchar(255) not null,
 	email varchar(255) not null,
 	password varchar(255) not null,
+	type varchar(10) default 'cliente' null,
+	avatar varchar(255) null,
 	remember_token varchar(100) null,
 	created_at timestamp null,
 	updated_at timestamp null,
@@ -240,24 +211,7 @@ create table users
 )
 ;
 
-create table usuario
-(
-	user_id int auto_increment
-		primary key,
-	user_dni varchar(8) null,
-	user_name varchar(200) not null,
-	user_lastname varchar(200) not null,
-	user_email varchar(200) null,
-	user_age int(3) not null,
-	user_address varchar(200) null,
-	user_birthday date null,
-	user_cellphone varchar(15) null,
-	USER_STATUS tinyint(1) null,
-	USER_ROLE varchar(200) null,
-	user_create timestamp default CURRENT_TIMESTAMP not null,
-	user_update timestamp default CURRENT_TIMESTAMP not null
-)
-;
+
 
 create table usuarios
 (
@@ -271,26 +225,5 @@ create table usuarios
 )
 ;
 
-create procedure ALLARTICLES ()
-BEGIN
-    SELECT * FROM ARTICLES;
-  END;
 
-create function GET_EDAD (dni varchar(8)) returns int(2)
-BEGIN
-    DECLARE EDAD INT(2);
-    SELECT user_age INTO EDAD FROM usuario WHERE usuario.user_dni=dni;
-    RETURN EDAD;
-  END;
-
-create procedure GET_USERS (IN LIMITER int)
-BEGIN
-    SELECT * FROM usuario  LIMIT LIMITER;
-  END;
-
-create procedure collect_articles ()
-BEGIN
-        DECLARE  cur1 CURSOR FOR SELECT ARTICLES.ARTICLE_ID, ARTICLES.TITLE, ARTICLES.CATEGORY FROM ARTICLES;
-       OPEN cur1;
-     END;
 
