@@ -19,9 +19,12 @@ class PaqueteTuristico extends Model
         'id_hot',
         'id_res',
         'id_dis',
-        'estado'
+        'estado',
+        'promocion',
+        'descuento',
+        'startpromo',
+        'endpromo'
     ];
     protected $guarded=[
-
     ];
 }

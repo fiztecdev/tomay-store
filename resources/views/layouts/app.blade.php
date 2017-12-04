@@ -26,9 +26,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="hold-transition skin-green sidebar-mini">
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top ">
             <div class="container">
                 <div class="navbar-header">
 
@@ -86,7 +86,6 @@
         </nav>
         @yield('content')
     </div>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- jQuery 2.1.4 -->

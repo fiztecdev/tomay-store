@@ -5,6 +5,7 @@ namespace apptour\Http\Controllers;
 use Illuminate\Http\Request;
 use apptour\Http\Requests;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use apptour\Http\Requests\PaqueteTuristicoFormRequest;
@@ -32,7 +33,9 @@ class PaqueteTuristicoController extends Controller
                 ->join('restaurante as res','pq.id_res','=','res.id_res')
                 ->join('distino as dis','pq.id_dis','=','dis.id_dis')
                 ->join('hotel as hot','pq.id_hot','=','hot.id_hot')
-                ->select('pq.id_paq','pq.ruta','pq.costo','pq.duracion_dias','res.nombre as restaurante', 'dis.lugar as distino','hot.nombre as hotel')
+                ->select('pq.id_paq','pq.ruta','pq.costo','pq.duracion_dias',
+                    'res.nombre as restaurante', 'dis.lugar as distino',
+                    'hot.nombre as hotel','pq.promocion','pq.descuento')
                 ->where('pq.ruta','LIKE','%'.$query.'%')
                 ->where('PQ.estado','=','1')
                 ->orderBy('pq.id_paq','desc')
@@ -87,6 +90,10 @@ class PaqueteTuristicoController extends Controller
         $pqturistico->id_hot=$request->get('hotel');
         $pqturistico->id_res=$request->get('restaurante');
         $pqturistico->id_dis=$request->get('destino');
+        $pqturistico->promocion=$request->get('promocionable');
+        $pqturistico->startpromo=$request->get('startpromo');
+        $pqturistico->endpromo=$request->get('endpromo');
+        $pqturistico->descuento=$request->get('descuento');
         $pqturistico->update();
 
         return Redirect::to('store/pqturistico');

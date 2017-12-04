@@ -26,7 +26,11 @@
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="email">Costo</label>
-                <input type="number" name="costo" required value="{{$pqturistico->costo}}" class="form-control">
+                <div class="input-group">
+                    <span class="input-group-addon">S/</span>
+                    <input type="number" name="costo" step="any" required value="{{$pqturistico->costo}}" class="form-control">
+                    <span class="input-group-addon">.00</span>
+                </div>
             </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -79,10 +83,47 @@
             </div>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <label clas>Promocionable</label>
+                <label class=" form-inline form-group">
+                    <input  type="radio" name="promocionable" id="promo" value="1" > SI
+                </label>
+                <label class="form-inline form-group">
+                    <input  type="radio" name="promocionable" id="promo" value="0"> NO
+                </label>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-                <button type="submit" class="btn btn-primary"> Guardar</button>
-                <button type="reset" class="btn btn-danger">Cancelar</button>
+                <label for="descuento">Descuento</label>
+                <div class="input-group">
+                    <span class="input-group-addon">%</span>
+                    <input type="number" name="descuento" step="any" max="100"  value="{{$pqturistico->descuento}}" class="form-control">
+                </div>
             </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="startpromocion">Inicio Promocion</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-calendar-times-o"></i></span>
+                    <input type="datetime-local" value="{{$pqturistico->startpromo}}" name="startpromo"  class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+                <label for="endpromocion">Fin Promocion</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-calendar-times-o"></i></span>
+                    <input type="datetime-local" value="{{$pqturistico->endpromo}}" name="endpromo"  class="form-control">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+            <button type="reset" class="btn btn-danger">Cancelar</button>
         </div>
     </div>
     {!! Form::close()!!}

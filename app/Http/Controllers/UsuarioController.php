@@ -31,7 +31,7 @@ class UsuarioController extends Controller
             $usuarios=DB::table('usuarios')->where('name','LIKE','%'.$query.'%')
             ->where('status','=','1')
             ->orderBy('id','asc')
-            ->paginate(7);
+            ->paginate(10);
             return view('store.usuario.index',["usuarios"=>$usuarios],["searchText"=>$query]);
         }
         

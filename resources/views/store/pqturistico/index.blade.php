@@ -26,6 +26,8 @@
                     <th>Hotel</th>
                     <th>Restaurante</th>
                     <th>Destino</th>
+                    <th>Promocion</th>
+                    <th>Descuento</th>
                     @if(Auth::check())
                         @if(Auth::user()->type=='admin')
                             <th>Opciones</th>
@@ -41,11 +43,21 @@
                             <td>{{$pqturistico->hotel}}</td>
                             <td>{{$pqturistico->restaurante}}</td>
                             <td>{{$pqturistico->distino}}</td>
+                            <td>
+                                @if($pqturistico->promocion==1)
+                                    <span class="badge btn-warning"><i class="fa fa-star"></i>En Promocion</span>
+                                @else
+                                    <span class="badge btn-linkedin">No Promocion</span>
+                                @endif
+                            </td>
+                            <td>
+                                <span class="badge badge">{{$pqturistico->descuento}} %</span>
+                            </td>
                             @if(Auth::check())
                                 @if(Auth::user()->type=='admin')
                                     <td>
                                         <a href="{{URL::action('PaqueteTuristicoController@edit',$pqturistico->id_paq)}}">
-                                            <button class="btn btn-info">Editar</button>
+                                            <button class="btn btn-info"> <i class="fa fa-edit"></i>Editar</button>
                                         </a>
                                         <a href="" data-target="#modal-delete-{{$pqturistico->id_paq}}"
                                            data-toggle="modal">

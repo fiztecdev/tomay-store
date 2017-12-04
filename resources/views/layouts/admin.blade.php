@@ -8,6 +8,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-toggle.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!-- Theme style -->
@@ -19,13 +20,13 @@
     <link rel="shortcut icon" href="{{asset('img/checked.png')}}">
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>TSR</b>V</span>
             <!-- logo for regular state and mobile devices -->
@@ -132,7 +133,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pqturistico"><i class="fa fa-circle-o"></i>Paquetes Turísticos</a></li>
+                        <li><a href="/store/pqturistico"><i class="fa fa-circle-o"></i>Paquetes Turísticos</a></li>
                         <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
@@ -144,7 +145,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="restaurante"><i class="fa fa-circle-o"></i>Resturantes</a></li>
+                        <li><a href="/store/restaurante"><i class="fa fa-circle-o"></i>Resturantes</a></li>
                         <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
@@ -155,19 +156,19 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="hotel"><i class="fa fa-circle-o"></i>Hoteles</a></li>
+                        <li><a href="/store/hotel"><i class="fa fa-circle-o"></i>Hoteles</a></li>
                         <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
                 @if(Auth::check())
                     @if(Auth::user()->type=='admin')
                         <li class="treeview">
-                            <a href="usuario">
+                            <a href="">
                                 <i class="fa fa-user"></i> <span>Usuarios y Accesos</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href=""><i class="fa fa-circle-o"></i>Usuarios</a></li>
+                                <li><a href="/store/usuario"><i class="fa fa-circle-o"></i>Usuarios</a></li>
 
                             </ul>
                         </li>
@@ -244,7 +245,15 @@
 <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
 <!-- Bootstrap 3.3.5 -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/bootstrap-toggle.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('js/app.min.js')}}"></script>
-
+<script>
+    $(function() {
+        $('#promos').change(function() {
+            var promos=$('#promos').val();
+            console.log("Promos: "+promos);
+        })
+    })
+</script>
 </body>
