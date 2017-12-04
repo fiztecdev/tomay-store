@@ -134,7 +134,6 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/store/pqturistico"><i class="fa fa-circle-o"></i>Paquetes Turísticos</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
 
@@ -146,7 +145,6 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/store/restaurante"><i class="fa fa-circle-o"></i>Resturantes</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -157,7 +155,6 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/store/hotel"><i class="fa fa-circle-o"></i>Hoteles</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i>Promociones</a></li>
                     </ul>
                 </li>
                 @if(Auth::check())
