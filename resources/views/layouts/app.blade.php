@@ -26,7 +26,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini" background="{{'img/MD_background.png'}}">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top ">
             <div class="container">
