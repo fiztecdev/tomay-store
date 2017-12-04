@@ -1,1 +1,0 @@
-INSERT INTO development.users (fullname, name, email, password, type, avatar, remember_token, created_at, updated_at) VALUES ('Administrador', 'adminuser', 'adminuser@gmail.com', '$2y$10$yFgBxiRN1mEM6n3oT4CkTuvLoOG9NhniwuuG/242NO.02cC5Rwbcy', 'admin', 'init.svg', 'ZUtZkTWE4RgLYqFPt4h0XA2u8CDulZNIxKHFXXgIPvKzgDG6eNyCnaePFy6e', '2017-11-17 02:14:30', '2017-11-17 02:14:30');
